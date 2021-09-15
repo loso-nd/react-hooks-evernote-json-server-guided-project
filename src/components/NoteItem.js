@@ -1,10 +1,10 @@
 import React from "react";
 
-function NoteItem() {
+function NoteItem({note}) {
   return (
     <li>
-      <h2>Title</h2>
-      <p>Caption...</p>
+      <h2>{note.title}</h2>
+      <p className="autoShowHide">{note.body}</p>
     </li>
   );
 }

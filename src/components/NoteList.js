@@ -5,8 +5,8 @@ function NoteList() {
   const [notes, setNotes] = useState([])
 
   useEffect(() => {
-    console.log("useEffect called")
-    //fetch notes from db
+    // console.log("useEffect called")
+    //When component renders, we fetch local api once > GET '/notes' > set notes to state
     fetch('http://localhost:3000/notes')
     .then(res => res.json())
     .then(notes => {
@@ -17,8 +17,13 @@ function NoteList() {
   console.log(notes)
   return (
     <ul>
-      {/* Render list of notes here... */}
-      <NoteItem />
+      {notes.map(note => {
+        return (
+          <NoteItem key={note.id} note={note}/>
+        )
+        
+      })}
+  
     </ul>
   );
 }
@@ -30,4 +35,5 @@ export default NoteList;
  * * function that takes in some props and returns some jsx
  * 
  * !UseEffect : Fetch data (GET, POST, PATCH)
+ * * When component renders, we fetch local api once > GET '/notes' > set notes to state
  */

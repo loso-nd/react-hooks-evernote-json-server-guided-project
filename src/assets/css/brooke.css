@@ -136,6 +136,7 @@ div.sidebar ul li:hover {
 
 .sidebar {
   width:25%;
+  height: 500px;
   overflow: scroll;
 }
 
@@ -184,4 +185,24 @@ button:hover, .nav-bar:hover, input[type="submit"]:hover {
 
 button:focus, input[type="submit"]:focus {
   outline: none;
+}
+
+/* Added Css */
+
+p.autoShowHide {
+  white-space: nowrap; 
+  width: 200px; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+p.autoShowHide:hover {
+  white-space: normal; 
+  overflow: visible;
+  width: 100%; 
+}
+
+note-list {
+  height: 300px;
+  overflow: auto;
 }
