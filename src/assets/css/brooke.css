@@ -136,7 +136,6 @@ div.sidebar ul li:hover {
 
 .sidebar {
   width:25%;
-  height: 500px;
   overflow: scroll;
 }
 
