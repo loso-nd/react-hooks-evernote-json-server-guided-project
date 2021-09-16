@@ -19,6 +19,7 @@ function NoteContainer() {
 
   }, [])
 //Render this function whenever a note is clicked
+// Step 3: Create and Updated State
   const displayNotes = (selectedNote) => {
     console.log(selectedNote, 'Coming from NoteContainer')
     setSelectedNote(selectedNote)
@@ -45,9 +46,13 @@ export default NoteContainer;
 * !UseEffect : Fetch data (GET, POST, PATCH)
 * * When component renders, we fetch local api once > GET '/notes' > set notes to state
 *
-* Step 2: 
+* Step 2: Create a callback function
 * * Create a function that is passed as props to <NoteItem/> as an onClick event. B/c we want the function to be invoked when a note is clicked.
 * * After we have displayed the notes on the page, we can pass in the note into our function diplayNotes() and console.log(note) to ensure that we are indeed getting that note. 
+*
+* Step 3: Create a new state and udpate state track and store what note has been clicked
+* * Created a new state (selectedNote) which has been passed into 'displayedNotes()' - a cb function that is invoked with the state we want track and store any note that has be clicked. 
+* * We update the state, which is then displaye into our <NoteViewer />
 
 
 

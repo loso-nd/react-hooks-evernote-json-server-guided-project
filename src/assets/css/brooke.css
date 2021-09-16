@@ -132,10 +132,12 @@ div.sidebar ul li:hover {
   margin: 10px 0px;
   padding: 20px;
   border: 2px dashed grey;
+  height: 80%;
 }
 
 .sidebar {
   width:25%;
+  height: 80%;
   overflow: scroll;
 }
 
@@ -146,7 +148,6 @@ div.sidebar ul li:hover {
 .note-editor {
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
 .note-editor textarea {
@@ -195,11 +196,11 @@ p.autoShowHide {
   text-overflow: ellipsis;
 }
 
-p.autoShowHide:hover {
+/* p.autoShowHide:hover {
   white-space: normal; 
-  overflow: visible;
+  overflow: hidden;
   width: 100%; 
-}
+} */
 
 note-list {
   height: 300px;
