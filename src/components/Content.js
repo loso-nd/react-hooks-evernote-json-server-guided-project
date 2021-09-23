@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import NoteEditor from "./NoteEditor";
 import NoteViewer from "./NoteViewer";
 import Instructions from "./Instructions";
@@ -13,15 +13,18 @@ import Instructions from "./Instructions";
 
 
 function Content( {notes, selectedNote}) {
+  const [toggleForm, setToggleForm] = useState(false)
 
-  // function passNote(){
-  //   return notes.map(note => <NoteViewer note={note}/>)
-  // }
+  const viewForm = () => {
+    console.log("From Content")
+    setToggleForm(toggleForm => !toggleForm)
+  }
+
   const getContent = () => {
-    if (false) {
+    if (toggleForm) {
       return <NoteEditor />;
     } else if (selectedNote) {
-      return <NoteViewer selectedNote={selectedNote}/>
+      return <NoteViewer selectedNote={selectedNote} viewForm={viewForm}/>
       // ( notes.map(note => <NoteViewer key={note.id} note={note} selectedNote={selectedNote}/> ))
       
     } else {

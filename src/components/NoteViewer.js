@@ -1,11 +1,15 @@
 import React from "react";
 
-function NoteViewer( {selectedNote}) {
+function NoteViewer( {selectedNote, viewForm}) {
+
+  const handleEditForm = () => {
+    viewForm()
+  }
   return (
     <>
       <h2>{selectedNote.title}</h2>
       <p>{selectedNote.body}</p>
-      <button>Edit</button>
+      <button onClick={handleEditForm}>Edit</button>
     </>
   );
 }
