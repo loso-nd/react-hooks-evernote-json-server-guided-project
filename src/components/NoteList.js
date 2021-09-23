@@ -1,13 +1,13 @@
 import React from "react";
 import NoteItem from "./NoteItem";
 
-function NoteList({notes, onClick}) {
+function NoteList({notes, onClick, handleNote}) {
   console.log(notes)
   return (
     <ul>
       {notes.map(note => {
         return (
-          <NoteItem key={note.id} note={note} onClick={onClick}/>
+          <NoteItem key={note.id} note={note} onClick={onClick} />
         )
         
       })}

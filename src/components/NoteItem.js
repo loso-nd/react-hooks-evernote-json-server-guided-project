@@ -1,6 +1,5 @@
 import React from "react";
 
-
 function NoteItem({note, onClick}) {
   return (
     <li onClick={() => onClick(note)}>
