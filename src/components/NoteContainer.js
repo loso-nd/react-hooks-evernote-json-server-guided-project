@@ -1,28 +1,56 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Search from "./Search";
 import Sidebar from "./Sidebar";
 import Content from "./Content";
+import { BrowserRouter } from 'react-router-dom';
 
-function NoteContainer({notes, onSearchChange, addNewNote }) {
-  //console.log(notes)
+function NoteContainer() {
+  const [notes, setNotes] = useState([])
+  const [search, setSearch] = useState("")
   const [selectedNote, setSelectedNote] = useState(null)
 
-//Render this function whenever a note is clicked
-// Step 3: Create and Updated State
+
+  // Step 1: Fetch the notes from local API
+  useEffect(() => {
+      console.log("useEffect called")
+     //When component renders, we fetch local api once > GET '/notes' > set notes to state
+     fetch('http://localhost:3000/notes')
+     .then(res => res.json())
+     .then(notes => setNotes(notes));
+  }, [])
+
+    //filter search
+    const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(search.toLowerCase()));
+
+    //update state of search bar via user input
+    const handleSearchChange = (searchTerm) => {
+      console.log("After Update: ", searchTerm)
+      setSearch(searchTerm)
+    }
+  
+    //Create new note
+    const addNewNote = (newNote) => {
+      console.log("Adding new Note")
+      setNotes([...notes, newNote])
+    }
+
+
+//Render this function whenever a selected note is clicked from sidebar
   const displayNotes = (selectedNote) => {
     console.log(selectedNote, 'Coming from NoteContainer')
     setSelectedNote(selectedNote)
   }
   console.log(notes)
 
-// Step 2: Pass notes as props to be deconstructed to display our notes in the db
   return (
     <>
     {console.log(notes)}
-      <Search onSearchChange={onSearchChange}/>
+      <Search onSearchChange={handleSearchChange}/>
       <div className="container">
-        <Sidebar notes={notes} onClick={displayNotes} addNewNote={addNewNote}/>
-        <Content notes={notes} selectedNote={selectedNote}/>
+        <Sidebar notes={filteredNotes}  onClick={displayNotes} addNewNote={addNewNote}/>
+        <BrowserRouter>
+          <Content notes={notes} selectedNote={selectedNote} setNotes={setNotes}/>
+        </BrowserRouter>
       </div>
     </>
   );
@@ -32,20 +60,26 @@ export default NoteContainer;
 
 
 /** 
+* CRUD
 * !Basics
 * * A function takes in some props and returns some jsx
 * 
+* Step 1a: Deconstruct props and pass notes as props to <Sidebar />
 * !UseEffect : Fetch data (GET, POST, PATCH)
 * * When component renders, we fetch local api once > GET '/notes' > set notes to state
 *
-* Step 2: Create a callback function
-* * Create a function that is passed as props to <NoteItem/> as an onClick event. B/c we want the function to be invoked when a note is clicked.
-* * After we have displayed the notes on the page, we can pass in the note into our function diplayNotes() and console.log(note) to ensure that we are indeed getting that note. 
+* Step 2a
+* * Deconstruct onSearchChange and pass as props to <Search /> 
+* * Create state to track and store the selectedNotes
+* * Add onClick to <Sidebar /> call it displayNotes
+* * Create displayNotes() function that will update the state of our selectedNotes
+* * displayNotes() will take (selecedNote as an argment) > console.log(selectedNotes) to ensure the one we clicked is seen in the browser console 
+* * display note on <NoteViewer />
 *
 * Step 3: Create a new state and udpate state track and store what note has been clicked
-* * Created a new state (selectedNote) which has been passed into 'displayedNotes()' - a cb function that is invoked with the state we want track and store any note that has be clicked. 
+* * Created state (selectedNote) which has been passed into 'displayedNotes()' - a cb function that is invoked with the state we want track and store any note that has be clicked. 
 * * We update the state, which is then displaye into our <NoteViewer />
-
-
-
+*
+* Step 4a: Deconstruct addNewNote and pass as props to <Sidebar/>
+*
 */

@@ -12,7 +12,7 @@ import Instructions from "./Instructions";
 */
 
 
-function Content( {notes, selectedNote}) {
+function Content( { notes, selectedNote, setNotes}) {
   const [toggleForm, setToggleForm] = useState(false)
 
   const viewForm = () => {
@@ -22,11 +22,9 @@ function Content( {notes, selectedNote}) {
 
   const getContent = () => {
     if (toggleForm) {
-      return <NoteEditor />;
+      return <NoteEditor notes={notes} selectedNote={selectedNote} setNotes={setNotes}/>;
     } else if (selectedNote) {
-      return <NoteViewer selectedNote={selectedNote} viewForm={viewForm}/>
-      // ( notes.map(note => <NoteViewer key={note.id} note={note} selectedNote={selectedNote}/> ))
-      
+      return <NoteViewer selectedNote={selectedNote} viewForm={viewForm}/>      
     } else {
       return <Instructions />;
     }

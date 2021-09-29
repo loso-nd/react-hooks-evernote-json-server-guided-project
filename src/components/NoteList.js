@@ -1,7 +1,7 @@
 import React from "react";
 import NoteItem from "./NoteItem";
 
-function NoteList({notes, onClick, handleNote}) {
+function NoteList({notes, onClick}) {
   console.log(notes)
   return (
     <ul>
@@ -19,6 +19,7 @@ function NoteList({notes, onClick, handleNote}) {
 export default NoteList;
 
 /**
- * Step 2b: deconstruct notes and map notes into the <NoteItem/>?
+ * Step 1c: Deconstruct notes and map notes into <NoteItem/> for each note?
  * 
+ * Step 2c: Deconstruct onClick and pass as props to <NoteItem/> for each note that has been selected.
  */

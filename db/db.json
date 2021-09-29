@@ -9,8 +9,8 @@
     {
       "id": 1,
       "userId": 1,
-      "title": "Suscipit est distinctio.",
-      "body": "Et corporis est consectetur ducimus debitis eveniet nostrum. Iusto qui quo quidem quidem repudiandae molestiae minus recusandae. Similique deleniti sit tempora labore. Dignissimos architecto eos sunt enim repellat illo omnis suscipit aut. A sapiente error. Occaecati eius neque.\n \rDucimus ratione aut. Placeat et sapiente labore. Distinctio iure repellat adipisci tempora rerum. Eius dolores quia numquam et aut.\n \rVoluptas est perspiciatis. Sunt ipsa praesentium excepturi. Quia vero non numquam aspernatur quia corporis dolorem minima."
+      "title": "Medical Surgical Nursing",
+      "body": "Assessment and Management of Clinical Problems"
     },
     {
       "id": 2,
@@ -63,18 +63,13 @@
     {
       "id": 10,
       "userId": 1,
-      "title": "Esse quia.",
-      "body": "Et consequatur soluta neque. Autem natus ad dolores et nisi est est enim. Blanditiis sed molestiae et minima voluptatem ipsum similique molestias vero. Corrupti vitae similique aut autem tempore voluptas. Rerum quo laudantium facilis dolorum dolores nihil. Consequatur reprehenderit molestiae error laudantium doloribus ut praesentium.\n \rNesciunt deleniti incidunt id vel facere a vel. Quisquam ut quae exercitationem optio. Esse enim recusandae qui accusantium. Qui ullam incidunt quam ex eligendi. Aut eum optio.\n \rAb dolorem reprehenderit est nobis autem sit non. Ipsam amet voluptatem consequatur voluptatem fugit suscipit quis eligendi. Alias iusto consequatur eum dolor."
+      "title": "Monday",
+      "body": "Assessment and Management of Clinical Problems"
     },
     {
-      "title": "default",
-      "body": "placeholder",
+      "title": "Tuesday",
+      "body": "Updating code",
       "id": 11
-    },
-    {
-      "title": "default",
-      "body": "placeholder",
-      "id": 12
     }
   ]
 }
