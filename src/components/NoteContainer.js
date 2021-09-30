@@ -1,12 +1,34 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Search from "./Search";
 import Sidebar from "./Sidebar";
 import Content from "./Content";
 
-function NoteContainer({notes, onSearchChange, addNewNote }) {
+function NoteContainer() {
   //console.log(notes)
+  const [notes, setNotes] = useState([])
+  const [search, setSearch] = useState("")
   const [selectedNote, setSelectedNote] = useState(null)
 
+      // Step 1: Fetch the notes from local API
+  useEffect(() => {
+    console.log("useEffect called")
+    //When component renders, we fetch local api once > GET '/notes' > set notes to state
+    fetch('http://localhost:3000/notes')
+    .then(res => res.json())
+    .then(notes => setNotes(notes));
+  }, [])
+  
+    const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(search.toLowerCase()));
+  
+    const handleSearchChange = (searchTerm) => {
+      console.log("After Update: ", searchTerm)
+      setSearch(searchTerm)
+    }
+  
+    const addNewNote = (newNote) => {
+      console.log("Adding new Note")
+      setNotes([...notes, newNote])
+    }
 //Render this function whenever a note is clicked
 // Step 3: Create and Updated State
   const displayNotes = (selectedNote) => {
@@ -19,10 +41,10 @@ function NoteContainer({notes, onSearchChange, addNewNote }) {
   return (
     <>
     {console.log(notes)}
-      <Search onSearchChange={onSearchChange}/>
+      <Search onSearchChange={handleSearchChange}/>
       <div className="container">
-        <Sidebar notes={notes} onClick={displayNotes} addNewNote={addNewNote}/>
-        <Content notes={notes} selectedNote={selectedNote}/>
+        <Sidebar notes={filteredNotes} onClick={displayNotes} addNewNote={addNewNote}/>
+        <Content notes={notes} setNote={setNotes}selectedNote={selectedNote}/>
       </div>
     </>
   );
