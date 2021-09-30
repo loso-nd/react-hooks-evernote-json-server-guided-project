@@ -63,12 +63,12 @@
     {
       "id": 10,
       "userId": 1,
-      "title": "Monday",
-      "body": "Assessment and Management of Clinical Problems"
+      "title": "Thursday",
+      "body": "Clicking on a note Should display the note in the NoteViewer section."
     },
     {
       "title": "Wednedsay",
-      "body": "Still updating notes",
+      "body": "Selecting another note while in the edit selected note section should cancel the patch request and display the new not that was selected. ",
       "id": 11
     }
   ]

@@ -38,7 +38,7 @@ export default Sidebar;
 
 
 /**
- * Step 1b: Deconstruct notes and pass as props to the end of the line.
+ * Step 1b: Deconstruct notes and pass as props to NoteLists
  * 
  * Step 2b: Deconstruct onClick and pass onClick as props to <NoteList/>
  * 

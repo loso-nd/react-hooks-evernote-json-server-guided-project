@@ -1,6 +1,7 @@
 import React from "react";
 
 function NoteItem({note, onClick}) {
+  console.log(note.id)
   return (
     <li onClick={() => onClick(note)}>
       <h2>{note.title}</h2>
@@ -14,7 +15,7 @@ export default NoteItem;
 
 
 /**
- * Step 1d: Deconstruct note and render notes.content to the DOM
+ * Step 1d: Deconstruct note and render jsx to the DOM
  *
  * Step 2d: Deconstruct onClick. 
  * * Set onClick prop as a return cb function up the parent, which will invoke displayNotes(), update setSelected state, and display selected note to <NoteViewer />

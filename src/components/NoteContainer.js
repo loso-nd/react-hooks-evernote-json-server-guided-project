@@ -8,8 +8,10 @@ function NoteContainer() {
   const [notes, setNotes] = useState([])
   const [search, setSearch] = useState("")
   const [selectedNote, setSelectedNote] = useState(null)
+  const [viewNote, setViewNote] = useState(null) // track notes in NoteViewer section
+  const [toggleForm, setToggleForm] = useState(false)
 
-      // Step 1: Fetch the notes from local API
+  // Step 1: Fetch the notes from local API
   useEffect(() => {
     console.log("useEffect called")
     //When component renders, we fetch local api once > GET '/notes' > set notes to state
@@ -17,41 +19,56 @@ function NoteContainer() {
     .then(res => res.json())
     .then(notes => setNotes(notes));
   }, [])
-  
-    const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(search.toLowerCase()));
-  
-    const handleSearchChange = (searchTerm) => {
-      console.log("After Update: ", searchTerm)
-      setSearch(searchTerm)
-    }
-  
-    const addNewNote = (newNote) => {
-      console.log("Adding new Note")
-      setNotes([...notes, newNote])
-    }
-//Render this function whenever a note is clicked
-// Step 3: Create and Updated State
-  const displayNotes = (selectedNote) => {
-    console.log(selectedNote, 'Coming from NoteContainer')
-    setSelectedNote(selectedNote)
-  }
-  console.log(notes)
 
-// Step 2: Pass notes as props to be deconstructed to display our notes in the db
+  //Render this function whenever a note is clicked to be displayed in NoteViewer
+  const displayNotes = (id) => {
+    console.log(id, 'Coming from NoteContainer')
+    setSelectedNote(id)
+    setViewNote(notes.filter(note => note.id === id)) // track notes in NoteViewer section
+    setToggleForm(false)
+  }
+
+  //Function responsible for updating the state of toggle
+  const viewForm = () => {
+    // setEditViewForm(true)
+    setToggleForm(true)
+  }
+  
+  //Callback function to handle onChange on search bar and update its state
+  const handleSearchChange = (searchTerm) => {
+    console.log("After Update: ", searchTerm)
+    setSearch(searchTerm)
+  }
+
+  //Filtered notes
+  const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(search.toLowerCase()));
+
+  //Function allows up to add a new note to the sidebar
+  const addNewNote = (newNote) => {
+    console.log("Adding new Note")
+    setNotes([...notes, newNote])
+  }
+
   return (
     <>
     {console.log(notes)}
       <Search onSearchChange={handleSearchChange}/>
       <div className="container">
         <Sidebar notes={filteredNotes} onClick={displayNotes} addNewNote={addNewNote}/>
-        <Content notes={notes} setNote={setNotes}selectedNote={selectedNote}/>
+        <Content 
+          notes={notes} 
+          setNotes={setNotes} 
+          note={viewNote} 
+          toggleForm={toggleForm} 
+          viewForm={viewForm} 
+          selectedNote={selectedNote}
+        />
       </div>
     </>
   );
 }
 
 export default NoteContainer;
-
 
 /*** 
 * ! CRUD Basics
@@ -61,41 +78,33 @@ export default NoteContainer;
  * * Create state to store and track notes
  * !  UseEffect : Fetch data (GET, POST, PATCH)
  * * useEffect() bc we want to fetch on page load one time 
- * * setNotes(notes) to update the state and stores our Notes from api
+ * * setNotes(notes) to update the state and stores our response from api
  * * pass notes as props to <Sidebar />
  * * To check if notes has been passed as props check react dev tools
  * 
  * Step 2: When a note from the sidebar is clicked, display its contents in the right panel.
- * * Create state to store and track selected notes
- * * Create handleChange func which will be invoked to update the state of setSearch
- * * pass handleSearchChange() as a prop to <NoteContainer/>
+ * * Create state to store and track selected notes (selectedNote) 
+ * * Create a function 'displayedNotes()' - a cb function that is invoked when a note on SideBar is clicked. 
+ * * Pass the function an arg > invoke setSelectedNote(id) with the same id passed in 
+ * * Update the state of setViewNote on filtered notes from api res where for each note, if the note.id === id passed in as an arg then we update the state with those notes. And setToggleForm(false)
+ * * Create funciton viewForm that will update the 
+ * 
+ *  Pass the following as Props to Content
+ * ? notes: pass the notes received from init 'GET' fetch request
+ * ? setNotes: updates the state of notes received from init 'GET' fetch request
+ * ? viewNote: tracks the state for the filtered notes that will be displayed in NoteViewer
+ * ? toggleForm: init state of the form that displays the >edit form< when edit button is clicked
+ * ? viewFrorm: cb function that updates the init state of the togggleForm from false to true
+ * ? selectedNotes: init state of the note.id that are passed into the displayNotes(id)
  * 
  * Step 3: Filter Notes: Implement the filter to search through your notes list by title.
- * * Since notes are fetched, tracked and stored in parent we can create our filter function here. 
- * * Create a const filteredNotes which filters the array of notes for each note.title perform array methods w/ .toLowerCase(), .includes(search).toLowerCase() state
- * * Pass filterdNotes as props called notes to <NoteContainer/> that way the notes being passed down have a filtered function.
+ * * Create handleSearchChange() which will be invoked to update the state of setSearch with the searchTerm passed in as in arg into  the funnction and into the state
+ * * pass handleSearchChange() as a prop to <Search/>
+ * * Create a const filteredNotes which will filter the array of notes received from api, where we filter search for each note.title incluing the search term typed into the input field. Perform array methods w/ .toLowerCase(), .includes(search).toLowerCase()
+ * * To account for the filtered notes we passe filterdNotes as props called notes to SideBar that way the notes 
  *  
  * Step 4: Clicking >New< will create a new note via a POST request with some default title and body.     
- * * Create a function addNewNote() which will add a new note to the existing list of notes in the sidebar via spread operater to upstate the state of setNotes
- * * Pass addNewNotes() as props to <NoteContainer/>
- * *                                                   
+ * * Create a function addNewNote() which will add a new note to the existing list of notes in the Sidebar via spread operater to upstate the state of setNotes
+ * * Pass addNewNotes() as props to <Sidebar/>
+ *                                                    
  */
-
-/** 
-
-
-* Step 2a
-* * Deconstruct onSearchChange and pass as props to <Search /> 
-* * Create state to track and store the selectedNotes
-* * Add onClick to <Sidebar /> call it displayNotes
-* * Create displayNotes() function that will update the state of our selectedNotes
-* * displayNotes() will take (selecedNote as an argment) > console.log(selectedNotes) to ensure the one we clicked is seen in the browser console 
-* * display note on <NoteViewer />
-*
-* Step 3: Create a new state and udpate state track and store what note has been clicked
-* * Created state (selectedNote) which has been passed into 'displayedNotes()' - a cb function that is invoked with the state we want track and store any note that has be clicked. 
-* * We update the state, which is then displaye into our <NoteViewer />
-*
-* Step 4a: Deconstruct addNewNote and pass as props to <Sidebar/>
-*
-*/
