@@ -2,6 +2,7 @@ import React from "react";
 import NoteList from "./NoteList";
  
 function Sidebar({notes, onClick, addNewNote}) {
+  console.log(notes)
 
   const handleNote = () => {
       console.log("Coming from sideBar")
@@ -14,7 +15,7 @@ function Sidebar({notes, onClick, addNewNote}) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(createNote)
+      body: JSON.stringify(createNote )
     })
     .then(res => res.json())
     .then((newNote) => {
@@ -32,6 +33,7 @@ function Sidebar({notes, onClick, addNewNote}) {
 }
 
 export default Sidebar;
+
 
 
 

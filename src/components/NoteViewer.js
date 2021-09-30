@@ -3,7 +3,7 @@ import React from "react";
 function NoteViewer( {selectedNote, viewForm}) {
 
   const handleEditForm = () => {
-    viewForm()
+    viewForm(selectedNote)
   }
   return (
     <>

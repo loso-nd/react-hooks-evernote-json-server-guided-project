@@ -1,7 +1,7 @@
 import React from "react";
 import NoteItem from "./NoteItem";
 
-function NoteList({notes, onClick}) {
+function NoteList({notes, onClick, handleNote}) {
   console.log(notes)
   return (
     <ul>

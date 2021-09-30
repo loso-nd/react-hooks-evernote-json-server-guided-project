@@ -12,6 +12,7 @@ function NoteItem({note, onClick}) {
 export default NoteItem;
 
 
+
 /**
  * Step 1d: Deconstruct note and render notes.content to the DOM
  *
