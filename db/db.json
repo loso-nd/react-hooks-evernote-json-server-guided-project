@@ -10,7 +10,7 @@
       "id": 1,
       "userId": 1,
       "title": "Medical Surgical Nursing",
-      "body": "Assessment and Management of Clinical Problems"
+      "body": "Assessment and Management of Clinical Problems. i know that."
     },
     {
       "id": 2,
@@ -70,6 +70,11 @@
       "title": "Wednedsay",
       "body": "Selecting another note while in the edit selected note section should cancel the patch request and display the new not that was selected. ",
       "id": 11
+    },
+    {
+      "title": "default",
+      "body": "placeholder",
+      "id": 12
     }
   ]
 }

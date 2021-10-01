@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function NoteEditor({notes, setNotes, selectedNote }) {
+function NoteEditor({notes, setNotes, selectedNote, onCancelEdit }) {
   console.log("selected note from NoteEditor", selectedNote.id);
   const [title, setTitle] = useState (selectedNote.title)
   const [body, setBody] = useState (selectedNote.body)
@@ -34,6 +34,11 @@ function NoteEditor({notes, setNotes, selectedNote }) {
     setNotes(newSidebar)
   }
 
+  const handleClick = () => {
+    onCancelEdit(true)
+  }
+
+
   return (
     <form className="note-editor" onSubmit={(e) => handleSubmit(e, selectedNote)}>
       <input 
@@ -51,7 +56,8 @@ function NoteEditor({notes, setNotes, selectedNote }) {
       />
       <div className="button-row">
         <input className="button" type="submit" value="Save" />
-        <button type="button">Cancel</button>
+        <button type="button"
+          onClick={handleClick}>Cancel</button>
       </div>
     </form>
   );

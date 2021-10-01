@@ -7,8 +7,8 @@ function Sidebar({notes, onClick, addNewNote}) {
   const handleNote = () => {
       console.log("Coming from sideBar")
     const createNote = {
-      title: "default",
-      body: "placeholder"
+      title: "Default Tile",
+      body: "Default Placeholder"
     }
     fetch('http://localhost:3000/notes', {
       method: 'POST',

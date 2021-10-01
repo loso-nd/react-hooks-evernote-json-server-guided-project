@@ -5,7 +5,7 @@ function Header() {
     <div className="nav-bar">
       <ul>
         <li className="nav-item">
-          <h2>Abby's Note Taker</h2>
+          <h2>Tchad's Note Taker</h2>
         </li>
       </ul>
     </div>

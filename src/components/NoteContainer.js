@@ -33,6 +33,17 @@ function NoteContainer() {
     // setEditViewForm(true)
     setToggleForm(true)
   }
+
+  //Function allows up to add a new note to the sidebar
+  const addNewNote = (newNote) => {
+    console.log("Adding new Note")
+    setNotes([...notes, newNote])
+  }
+
+  const onCancelEdit = () => {
+    console.log("Cancel Edit Button has been Clicked")
+    setToggleForm(false)
+  }
   
   //Callback function to handle onChange on search bar and update its state
   const handleSearchChange = (searchTerm) => {
@@ -42,12 +53,6 @@ function NoteContainer() {
 
   //Filtered notes
   const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(search.toLowerCase()));
-
-  //Function allows up to add a new note to the sidebar
-  const addNewNote = (newNote) => {
-    console.log("Adding new Note")
-    setNotes([...notes, newNote])
-  }
 
   return (
     <>
@@ -62,6 +67,7 @@ function NoteContainer() {
           toggleForm={toggleForm} 
           viewForm={viewForm} 
           selectedNote={selectedNote}
+          onCancelEdit={onCancelEdit} 
         />
       </div>
     </>
