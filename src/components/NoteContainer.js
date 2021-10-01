@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import Search from "./Search";
 import Sidebar from "./Sidebar";
 import Content from "./Content";
+import { BrowserRouter} from 'react-router-dom';
 
 function NoteContainer() {
   //console.log(notes)
@@ -60,6 +61,7 @@ function NoteContainer() {
       <Search onSearchChange={handleSearchChange}/>
       <div className="container">
         <Sidebar notes={filteredNotes} onClick={displayNotes} addNewNote={addNewNote}/>
+        <BrowserRouter>
         <Content 
           notes={notes} 
           setNotes={setNotes} 
@@ -69,6 +71,7 @@ function NoteContainer() {
           selectedNote={selectedNote}
           onCancelEdit={onCancelEdit} 
         />
+        </BrowserRouter >
       </div>
     </>
   );
